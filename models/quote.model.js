@@ -3,10 +3,17 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
 const quoteSchema = mongoose.Schema({
-    projectId: {
+    project: {
         type: ObjectId,
-        require: [true, 'Project id is required']
+        require: [true, 'Project id is required'],
+        ref: "Project"
     },
+    user: {
+        type: ObjectId,
+        require: true,
+        ref: "User"
+    },
+    email: String,
     quoteTitle: {
         type: String,
         trim: true,
@@ -38,8 +45,8 @@ const quoteSchema = mongoose.Schema({
         type: Object,
         require: [true, "File is required"]
     },
-    status:{
-        type:String,
+    status: {
+        type: String,
         enum: ["pending", "approved", "rejected"],
     }
 },

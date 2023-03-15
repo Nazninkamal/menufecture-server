@@ -1,8 +1,27 @@
-const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService } = require("../Services/quote.service");
+const User = require("../models/user_module");
+var html_to_pdf = require('html-pdf-node');
+
+const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService } = require("../Services/quote.service");
+const documentPDF = require("../utils/Document");
+
 
 exports.addQuote = async (req, res) => {
     try {
         const { id } = req.params;
+        const email = req.user.email;
+        const user = await User.findOne({ email });
+
+
+        if (!user) {
+            return res.status(401).json({
+                result: quote,
+                status: "fail",
+                message: "You are not authenticated",
+            });
+        }
+
+
+
 
         const type = req?.body?.type
 
@@ -19,13 +38,30 @@ exports.addQuote = async (req, res) => {
 
         const newFile = await { ...req.file, fileURL };
 
-        const newQuote = { quoteTitle: uniqueSuffix, threeDFile: newFile, projectId: id, type };
+        const newQuote = { quoteTitle: uniqueSuffix, threeDFile: newFile, user: user._id, email: user.email, project: id, type };
 
         const quote = await addQuoteService(newQuote);
         res.status(200).json({
             result: quote,
             status: "success",
             message: "Quote create is Successfully",
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: "fail",
+            error,
+        });
+    }
+};
+exports.getMyAllQuotes = async (req, res) => {
+    try {
+        const email = req.user.email;
+
+        const quotes = await getMyAllQuoteService(email);
+        res.status(200).json({
+            result: quotes,
+            status: "success",
+            message: "Get Quote  is Successfully",
         });
     } catch (error) {
         res.status(500).json({
@@ -139,3 +175,29 @@ exports.uploadTheeDFile = async (req, res) => {
 };
 
 
+exports.downLoadDocument = async (req, res) => {
+    try {
+
+        const { id } = req.params;
+
+        const data = await downloadDocumentService(id);
+        /*  console.log(data); */
+
+        let options = { format: 'A4' };
+        let file = { content: documentPDF() };
+
+        await html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+
+            res.status(200).end(pdfBuffer)
+
+        });
+
+
+
+    } catch (error) {
+        res.status(500).json({
+            status: "fail",
+            error,
+        });
+    }
+}
