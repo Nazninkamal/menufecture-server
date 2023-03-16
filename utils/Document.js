@@ -1,132 +1,89 @@
 const documentPDF = () => {
-   const today = new Date();
-   return `
-    <!doctype html>
-    <html>
-       <head>
-          <meta charset="utf-8">
-          <title>PDF Result Template</title>
-          <style>
-             .invoice-box {
-             max-width: 800px;
-             margin: auto;
-             padding: 30px;
-             border: 1px solid #eee;
-             box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-             font-size: 16px;
-             line-height: 24px;
-             font-family: 'Helvetica Neue', 'Helvetica',
-             color: #555;
-             }
-             .margin-top {
-             margin-top: 50px;
-             }
-             .justify-center {
-             text-align: center;
-             }
-             .invoice-box table {
-             width: 100%;
-             line-height: inherit;
-             text-align: left;
-             }
-             .invoice-box table td {
-             padding: 5px;
-             vertical-align: top;
-             }
-             .invoice-box table tr td:nth-child(2) {
-             text-align: right;
-             }
-             .invoice-box table tr.top table td {
-             padding-bottom: 20px;
-             }
-             .invoice-box table tr.top table td.title {
-             font-size: 45px;
-             line-height: 45px;
-             color: #333;
-             }
-             .invoice-box table tr.information table td {
-             padding-bottom: 40px;
-             }
-             .invoice-box table tr.heading td {
-             background: #eee;
-             border-bottom: 1px solid #ddd;
-             font-weight: bold;
-             }
-             .invoice-box table tr.details td {
-             padding-bottom: 20px;
-             }
-             .invoice-box table tr.item td {
-             border-bottom: 1px solid #eee;
-             }
-             .invoice-box table tr.item.last td {
-             border-bottom: none;
-             }
-             .invoice-box table tr.total td:nth-child(2) {
-             border-top: 2px solid #eee;
-             font-weight: bold;
-             }
-             @media only screen and (max-width: 600px) {
-             .invoice-box table tr.top table td {
-             width: 100%;
-             display: block;
-             text-align: center;
-             }
-             .invoice-box table tr.information table td {
-             width: 100%;
-             display: block;
-             text-align: center;
-             }
-             }
-          </style>
-       </head>
-       <body>
-          <div className="invoice-box">
-             <table cellpadding="0" cellspacing="0">
-                <tr className="top">
-                   <td colspan="2">
-                      <table>
-                         <tr>
-                            <td className="title"><img  src="https://i2.wp.com/cleverlogos.co/wp-content/uploads/2018/05/reciepthound_1.jpg?fit=800%2C600&ssl=1"
-                               style="width:100%; max-width:156px;"></td>
-                            <td>
-                               Datum: ${`${today.getDate()}. ${today.getMonth() + 1}. ${today.getFullYear()}.`}
-                            </td>
-                         </tr>
-                      </table>
-                   </td>
-                </tr>
-                <tr className="information">
-                   <td colspan="2">
-                      <table>
-                         <tr>
-                            <td>
-                               Customer name: ${'Rukon Uddin'}
-                            </td>
-                            <td>
-                               Receipt number: ${"0123456"}
-                            </td>
-                         </tr>
-                      </table>
-                   </td>
-                </tr>
-                <tr className="heading">
-                   <td>Bought items:</td>
-                   <td>Price</td>
-                </tr>
-                <tr className="item">
-                   <td>First item:</td>
-                   <td>${1500}$</td>
-                </tr>
-                <tr className="item">
-                   <td>Second item:</td>
-                   <td>${85444}$</td>
-                </tr>
-             </table>
-             <br />
-             <h1 className="justify-center">Total price: ${5000}$</h1>
+  const today = new Date();
+  return `
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Document</title>
+   </head>
+   <body  style="padding: 0 8px;">
+       <main>
+          <div style="text-align: center;">
+           <h1>Goadditive</h1>
+           <h5>Quote Date: {dynamic}</h5>
           </div>
-       </body>
-    </html>
+           
+          <div style="display:flex; justify-content:space-between;">
+           <h5>Quote Number: {dynamic}</h5>
+           <h5>Ready for {dynamic} company</h5>  
+          </div>
+   
+          <div  style="border: green 1px dotted;">
+            <div  style="display:flex; justify-content:space-between;">
+              <div style="display: flex;">
+               <img style="width: 150px; height: 150px; margin: 1rem;" src="" alt="">
+                 <div style="line-height: 5px; margin-top: 1rem;">
+               <p style="font-size:small;">Product Name: </p>
+               <p style="font-size:small;">Material: Aluminum AlSi10Mg </p>
+               <p style="font-size:small;">Resolution: Normal Res</p>
+               <p style="font-size:small;">Finishing: Standard </p>
+               <p style="font-size:small;">Orientation: Direct Metal Laser Sintering</p>
+               
+                 </div>
+              </div>
+   
+   
+            <div style="border: green 1px dotted; margin: 1rem; padding: 1rem 2rem; line-height: 8px;">
+               <h5 style="font-size: small;">Quantity: 4</h5>
+               <h5 style="font-size: small;">Product Price: $555</h5>
+               <h5 style="font-size: small;">Delivery Cost: $44</h5>
+               <h5 style="font-size: small;">Delivary will take: 7 days</h5>
+   
+            </div>
+         
+         </div>
+         <hr>
+           <div style="text-align: center; line-height: 5px;">
+            <h5>Want you update quote?</h5>
+            <p>Please Return to the configuration page and update</p>
+           </div>
+         <hr>
+   
+          <div style="display: grid;grid-template-columns: auto auto; gap: 1rem; margin: 1rem;">
+            <div style="border: green 1px dotted; padding: 1rem;">
+               <h5 style="font-size: small;">Shipping details</h5>
+               <p style="font-size: small;">Full name:  </p>
+               <p style="font-size: small;">Email address:  </p>
+               <p style="font-size: small;">Company Name: </p>
+               <p style="font-size: small;">Company Address: </p>
+               <p style="font-size: small;">Phone Number: </p>
+               <p style="font-size: small;">Country:</p>
+               <p style="font-size: small;">Postal Code: </p>
+               
+            </div>
+   
+   
+            <div style="border: green 1px dotted; text-align: center;padding-top: 3rem;">
+               <h5>Order Summery</h5>
+               <p style="font-size: small;">Your parts need to your attention </p>
+               <p style="font-size: small;">Please go to configure page and checkout</p>
+               
+               
+            </div>
+          </div>
+          </div>
+           
+          <div style="line-height: 5px; text-align: center; margin: 1.5rem 0 1.5rem 0;">
+            <p style="font-size: small;">Thank you for the opportunity to quote your parts</p>
+            <p style="font-size: small;">Contact Customer Service at (87 7 ) 47 9-3680 or customerservice@protolabs.com</p>
+            <!-- <p>JSON Manufecturing Company, 5540 Pioneer Creek Dr. Maple Plain, MN 55359 United State</p> -->
+          </div>
+       </main>
+   </body>
+   </html>
     `;
 };
 

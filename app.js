@@ -17,6 +17,7 @@ app.use('/threeDFiles', express.static('./threeDFiles'));
 const projects = require("./Routes/project.route");
 const quotes = require("./Routes/quote.route");
 const users = require("./Routes/user.route");
+const material = require("./Routes/material.route");
 
 
 const uniqueSuffix = Math.round(Math.random() * 1E5) + '-' + Math.round(Math.random() * 1E5)
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/projects", projects);
 app.use("/api/v1/quotes", quotes);
 app.use("/api/v1/users", users);
+app.use("/api/v1/material", material);
 
 app.use("*", (req, res, nex) => {
     res.status(404).render('notFound.hbs')
