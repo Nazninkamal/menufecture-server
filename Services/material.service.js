@@ -8,3 +8,7 @@ exports.getMaterialService = async () => {
     const material = await Material.find({});
     return material;
 };
+exports.deleteMaterialService = async (id) => {
+    const material = await Material.findByIdAndDelete({ _id: id });
+    return material;
+};
