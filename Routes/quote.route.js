@@ -1,5 +1,5 @@
 const express = require("express");
-const { addQuote, uploadTheeDFile, getMyQuotes, getMySingleQuotes, updateMySingleQuotes, deleteMySingleQuotes,downLoadDocument,getMyAllQuotes } = require("../controllers/quote.controller");
+const { addQuote, uploadTheeDFile, getMyQuotes, getMySingleQuotes, updateMySingleQuotes, deleteMySingleQuotes,downLoadDocument,getMyAllQuotes,getMyAllOrderQuotes } = require("../controllers/quote.controller");
 const threeDFileUploader = require("../Middleware/threeDFileUploader");
 
 const verifyToken = require("../Middleware/verifyToken");
@@ -27,9 +27,13 @@ router.get('/downLoad/document/:id',verifyToken,downLoadDocument);
 router.get("/get-my-quotes/:id",
     verifyToken,
     getMyQuotes);
+
 router.get("/get-my-all-quotes",
     verifyToken,
     getMyAllQuotes);
+router.get("/get-all-order-quotes",
+    verifyToken,
+    getMyAllOrderQuotes);
 
 
 router.get("/get-my-single-quote/:id",

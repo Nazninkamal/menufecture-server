@@ -48,6 +48,10 @@ const quoteSchema = mongoose.Schema({
     status: {
         type: String,
         enum: ["pending", "approved", "rejected"],
+    },
+    orderStatus:{
+        type: String,
+        enum: ["order", "payment"],
     }
 },
     {

@@ -1,5 +1,5 @@
-const documentPDF = () => {
-  const today = new Date();
+const documentPDF = (data) => {
+  const today = new Date().toLocaleDateString();
   return `
    <!DOCTYPE html>
    <html lang="en">
@@ -13,11 +13,11 @@ const documentPDF = () => {
        <main>
           <div style="text-align: center;">
            <h1>Goadditive</h1>
-           <h5>Quote Date: {dynamic}</h5>
+           <h5>Date: ${today}</h5>
           </div>
            
           <div style="display:flex; justify-content:space-between;">
-           <h5>Quote Number: {dynamic}</h5>
+           <h5>Quote Number: ${data?._id}</h5>
            <h5>Ready for {dynamic} company</h5>  
           </div>
    
@@ -26,21 +26,21 @@ const documentPDF = () => {
               <div style="display: flex;">
                <img style="width: 150px; height: 150px; margin: 1rem;" src="" alt="">
                  <div style="line-height: 5px; margin-top: 1rem;">
-               <p style="font-size:small;">Product Name: </p>
-               <p style="font-size:small;">Material: Aluminum AlSi10Mg </p>
-               <p style="font-size:small;">Resolution: Normal Res</p>
-               <p style="font-size:small;">Finishing: Standard </p>
-               <p style="font-size:small;">Orientation: Direct Metal Laser Sintering</p>
+               <p style="font-size:small;">  ${data?.quoteTitle}</p>
+               <p style="font-size:small;">Material: ${data?.material} </p>
+               <p style="font-size:small;">Resolution: ${data?.resolution}</p>
+               <p style="font-size:small;">Finishing: ${data?.finish} </p>
+               <p style="font-size:small;">Orientation: ${data?.orientation}</p>
                
                  </div>
               </div>
    
    
             <div style="border: green 1px dotted; margin: 1rem; padding: 1rem 2rem; line-height: 8px;">
-               <h5 style="font-size: small;">Quantity: 4</h5>
-               <h5 style="font-size: small;">Product Price: $555</h5>
-               <h5 style="font-size: small;">Delivery Cost: $44</h5>
-               <h5 style="font-size: small;">Delivary will take: 7 days</h5>
+               <h5 style="font-size: small;">Quantity: ${data?.quantity}</h5>
+               <h5 style="font-size: small;">Total Price: $ ${data?.price}</h5>
+               <h5 style="font-size: small;">Status: ${data?.status}</h5>
+               <h5 style="font-size: small;">Delivery will take: 7 days</h5>
    
             </div>
          
@@ -55,13 +55,13 @@ const documentPDF = () => {
           <div style="display: grid;grid-template-columns: auto auto; gap: 1rem; margin: 1rem;">
             <div style="border: green 1px dotted; padding: 1rem;">
                <h5 style="font-size: small;">Shipping details</h5>
-               <p style="font-size: small;">Full name:  </p>
-               <p style="font-size: small;">Email address:  </p>
-               <p style="font-size: small;">Company Name: </p>
-               <p style="font-size: small;">Company Address: </p>
-               <p style="font-size: small;">Phone Number: </p>
-               <p style="font-size: small;">Country:</p>
-               <p style="font-size: small;">Postal Code: </p>
+               <p style="font-size: small;">Full name: ${data?.user?.fullName}</p>
+               <p style="font-size: small;">Email:  ${data?.user?.email} </p>
+               <p style="font-size: small;">Company:  ${data?.user?.company}</p>
+               <p style="font-size: small;">Phone:  ${data?.user?.phoneNumber}</p>
+               <p style="font-size: small;">Country:  ${data?.user?.country}</p>
+               <p style="font-size: small;">Language:  ${data?.user?.language}</p>
+               <p style="font-size: small;">Postal Code:  ${data?.user?.postalCode}</p>
                
             </div>
    
@@ -70,8 +70,7 @@ const documentPDF = () => {
                <h5>Order Summery</h5>
                <p style="font-size: small;">Your parts need to your attention </p>
                <p style="font-size: small;">Please go to configure page and checkout</p>
-               
-               
+                              
             </div>
           </div>
           </div>

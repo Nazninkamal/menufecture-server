@@ -14,6 +14,10 @@ exports.getMyAllQuoteService = async (email) => {
     const quotes = await Quote.find({ email });
     return quotes;
 };
+exports.getMyAllOrderQuoteService = async () => {
+    const quotes = await Quote.find({});
+    return quotes;
+};
 exports.getMySingleQuoteService = async (id) => {
     const quotes = await Quote.findOne({ _id: id });
     return quotes;

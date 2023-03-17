@@ -1,7 +1,7 @@
 const User = require("../models/user_module");
 var html_to_pdf = require('html-pdf-node');
 
-const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService } = require("../Services/quote.service");
+const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService,getMyAllOrderQuoteService } = require("../Services/quote.service");
 const documentPDF = require("../utils/Document");
 
 
@@ -53,6 +53,8 @@ exports.addQuote = async (req, res) => {
         });
     }
 };
+
+
 exports.getMyAllQuotes = async (req, res) => {
     try {
         const email = req.user.email;
@@ -70,6 +72,25 @@ exports.getMyAllQuotes = async (req, res) => {
         });
     }
 };
+exports.getMyAllOrderQuotes = async (req, res) => {
+    try {
+    
+
+        const quotes = await getMyAllOrderQuoteService();
+        res.status(200).json({
+            result: quotes,
+            status: "success",
+            message: "Get Quote  is Successfully",
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: "fail",
+            error,
+        });
+    }
+};
+
+
 exports.getMyQuotes = async (req, res) => {
     try {
         const { id } = req.params;
@@ -181,10 +202,10 @@ exports.downLoadDocument = async (req, res) => {
         const { id } = req.params;
 
         const data = await downloadDocumentService(id);
-        /*  console.log(data); */
+      
 
         let options = { format: 'A4' };
-        let file = { content: documentPDF() };
+        let file = { content: documentPDF(data) };
 
         await html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
 
