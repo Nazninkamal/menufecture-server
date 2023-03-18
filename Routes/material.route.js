@@ -6,7 +6,7 @@ const authorization = require("../Middleware/authorization");
 const router = express.Router();
 
 router.get("/get-material",verifyToken, getMaterial);
-router.post("/create-material",verifyToken,authorization("supplier"), createMaterial);
-router.delete("/delete-material/:id",verifyToken,authorization("supplier"), deleteMaterial);
+router.post("/create-material",verifyToken, createMaterial);
+router.delete("/delete-material/:id",verifyToken, deleteMaterial);
 
 module.exports = router;

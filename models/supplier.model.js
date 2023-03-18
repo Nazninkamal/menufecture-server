@@ -16,7 +16,7 @@ const supplierSchema = Mongoose.Schema({
         require: true,
         trim: true,
         validate: [validator.isEmail, "Provide a valid Email"],
-        unique: [true, "Email is must be unique"],
+
     },
     company: {
         type: String,
@@ -42,6 +42,11 @@ const supplierSchema = Mongoose.Schema({
         type: String,
         require: true,
         trim: true,
+    },
+    role: {
+        type: String,
+        default: 'user',
+        enum: ["user", "admin", "supplier"],
     },
 
     websiteLink: String,

@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { registrationService, findUserByToken, findUserByEmail, findAllUserService, updateDetailsService, ApplyForSupplierService, getApplyForSupplierService,makeAddApplyForSupplierService } = require("../Services/user.service");
+const { registrationService, findUserByToken, findUserByEmail, findAllUserService, updateDetailsService, ApplyForSupplierService, getApplyForSupplierService, makeAddApplyForSupplierService, deleteApplyForSupplierService, getApplyForSingleSupplierService } = require("../Services/user.service");
 const { sendMailWithGmail } = require("../utils/email");
 const { generateToken } = require("../utils/token");
 const { verifyEmail } = require('../utils/verifyEmail');
@@ -69,6 +69,7 @@ exports.updateDetails = async (req, res) => {
 };
 exports.registration = async (req, res) => {
     try {
+
         const user = await registrationService(req.body);
         const token = await user.generateConfirmationToken();
 
@@ -303,27 +304,18 @@ exports.applyForSupplier = async (req, res) => {
     try {
         const { email } = req.user;
 
-        const user = await findUserByEmail(email);
+        const singleSupplier = await getApplyForSingleSupplierService(email)
 
-        if (!user) {
+
+        if (singleSupplier) {
             return res.status(401).json({
-                status: "fail",
-                error: "You are No authenticated. Please create an account",
+                status: "You are Already applied",
+                error: 'You are Already applied',
             });
         }
-
-
-        if (user.status != "active") {
-            return res.status(401).json({
-                status: "fail",
-                error: "Your account is not active yet.",
-            });
-        }
-
 
 
         const supplier = await ApplyForSupplierService(req.body);
-
 
         res.status(200).json({
             result: {
@@ -370,9 +362,7 @@ exports.getApplyForSupplier = async (req, res) => {
 exports.makeAddApplyForSupplier = async (req, res) => {
     try {
 
-        const email = req.body.email;
-
-        const supplier = await makeAddApplyForSupplierService(email);
+        const supplier = await makeAddApplyForSupplierService(req.body);
 
         res.status(200).json({
             result: {
@@ -403,7 +393,7 @@ exports.deleteApplyForSupplier = async (req, res) => {
                 supplier: supplier,
 
             },
-            status: "success",
+            status: "Delete apply supplier is Successfully",
             message: "Delete apply supplier is Successfully",
         });
 

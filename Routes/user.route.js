@@ -16,9 +16,9 @@ router.get("/registration/confirmation/:token", confirmEmail);
 router.get("/get-all-users", getAllUsers);
 router.post("/registration", registration);
 router.post("/login", login);
-router.post("/applyForSupplier", verifyToken, authorization("user"), applyForSupplier);
-router.get("/getApplyForSupplier", verifyToken, authorization("admin"), getApplyForSupplier);
-router.patch("/makeAddApplyForSupplier", verifyToken, authorization("admin"), makeAddApplyForSupplier);
-router.patch("/deleteApplyForSupplier", verifyToken, authorization("admin"), deleteApplyForSupplier);
+router.post("/applyForSupplier", verifyToken, applyForSupplier);
+router.get("/getApplyForSupplier", verifyToken, getApplyForSupplier);
+router.patch("/makeAddApplyForSupplier", verifyToken, makeAddApplyForSupplier);
+router.delete("/deleteApplyForSupplier", verifyToken, deleteApplyForSupplier);
 
 module.exports = router;

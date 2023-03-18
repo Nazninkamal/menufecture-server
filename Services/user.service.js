@@ -54,16 +54,28 @@ exports.getApplyForSupplierService = async () => {
 
     return await Supplier.find({});
 };
-exports.makeAddApplyForSupplierService = async (email) => {
+exports.getApplyForSingleSupplierService = async (email) => {
 
-    return await User.updateOne({ email },
-        { role: "supplier" },
+    return await Supplier.findOne({ email });
+};
+exports.makeAddApplyForSupplierService = async (data) => {
+    const user = await Supplier.updateOne({ email: data.email },
+        { role: data.role },
+        {
+            runValidators: true,
+        }
+    );
+
+    return await User.updateOne({ email: data.email },
+        { role: data.role },
         {
             runValidators: true,
         });
 };
+
+
 exports.deleteApplyForSupplierService = async (email) => {
 
-    return await User.deleteOne({ email })
+    return await Supplier.deleteOne({ email })
 
 };
