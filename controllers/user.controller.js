@@ -71,20 +71,21 @@ exports.registration = async (req, res) => {
     try {
 
         const user = await registrationService(req.body);
-        const token = await user.generateConfirmationToken();
+        
+        // const token = await user.generateConfirmationToken();
 
-        await user.save({ validateBeforeSave: false });
+        // await user.save({ validateBeforeSave: false });
 
 
         // send email =================================
-        const mailData = {
-            to: [user.email],
-            subject: "Verify your Account",
-            html: verifyEmail(`${req.protocol
-                }://${req.get("host")}${req.originalUrl}/confirmation/${token}`)
-        };
+        // const mailData = {
+        //     to: [user.email],
+        //     subject: "Verify your Account",
+        //     html: verifyEmail(`${req.protocol
+        //         }://${req.get("host")}${req.originalUrl}/confirmation/${token}`)
+        // };
 
-        await sendMailWithGmail(mailData);
+        // await sendMailWithGmail(mailData);
 
         res.status(200).json({
             result: user,
@@ -115,7 +116,7 @@ exports.login = async (req, res) => {
 
         if (!user) {
             return res.status(401).json({
-                status: "fail",
+                status: "No user found. Please create an account",
                 error: "No user found. Please create an account",
             });
         }
@@ -124,14 +125,14 @@ exports.login = async (req, res) => {
 
         if (!isPasswordValid) {
             return res.status(403).json({
-                status: "fail",
+                status: "Password is not correct",
                 error: "Password is not correct",
             });
         }
 
         if (user.status != "active") {
             return res.status(401).json({
-                status: "fail",
+                status: "Your account is not active yet.",
                 error: "Your account is not active yet.",
             });
         }

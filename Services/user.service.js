@@ -25,7 +25,7 @@ exports.updateDetailsService = async (userInfo, email) => {
 
 exports.registrationService = async (userInfo) => {
     const hashedPassword = await bcrypt.hash(userInfo.password, 10);
-    let newUser = new User({ ...userInfo });
+    let newUser = await new User({ ...userInfo });
     newUser.password = hashedPassword;
     newUser.confirmPassword = undefined;
 
