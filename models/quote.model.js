@@ -49,9 +49,12 @@ const quoteSchema = mongoose.Schema({
         type: String,
         enum: ["pending", "approved", "rejected"],
     },
-    orderStatus:{
+    orderStatus: {
         type: String,
         enum: ["order", "payment"],
+    },
+    deliveryDate: {
+        type: String
     }
 },
     {

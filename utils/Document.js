@@ -1,5 +1,7 @@
 const documentPDF = (data) => {
   const today = new Date().toLocaleDateString();
+
+
   return `
    <!DOCTYPE html>
    <html lang="en">
@@ -18,7 +20,7 @@ const documentPDF = (data) => {
            
           <div style="display:flex; justify-content:space-between;">
            <h5>Quote Number: ${data?._id}</h5>
-           <h5>Ready for {dynamic} company</h5>  
+           <h5>Ready for ${data?.user?.company} company</h5>  
           </div>
    
           <div  style="border: green 1px dotted;">
@@ -40,7 +42,7 @@ const documentPDF = (data) => {
                <h5 style="font-size: small;">Quantity: ${data?.quantity}</h5>
                <h5 style="font-size: small;">Total Price: $ ${data?.price}</h5>
                <h5 style="font-size: small;">Status: ${data?.status}</h5>
-               <h5 style="font-size: small;">Delivery will take: 7 days</h5>
+               <h5 style="font-size: small;">Delivery will take:${data?.deliveryDate}</h5>
    
             </div>
          
