@@ -80,7 +80,6 @@ exports.getMyProjects = async (req, res) => {
             queries.limit = parseInt(limit);
         }
         const email = req?.user?.email;
-
         const question = await getMyProjectService(queries, email);
 
         res.status(200).json({

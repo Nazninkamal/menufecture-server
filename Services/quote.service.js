@@ -15,7 +15,7 @@ exports.getMyAllQuoteService = async (email) => {
     return quotes;
 };
 exports.getMyAllOrderQuoteService = async () => {
-    const quotes = await Quote.find({});
+    const quotes = await Quote.find({}).populate("supplier");
     return quotes;
 };
 exports.getMySingleQuoteService = async (id) => {

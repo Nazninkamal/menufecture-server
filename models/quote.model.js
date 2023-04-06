@@ -53,6 +53,18 @@ const quoteSchema = mongoose.Schema({
         type: String,
         enum: ["order", "payment"],
     },
+    sendToAdmin: {
+        type: String,
+        enum: ['sended']
+    },
+    sendToSupplier: {
+        type: String,
+        enum: ['sended']
+    },
+    supplier: {
+        type: ObjectId,
+        ref: "Supplier"
+    },
     deliveryDate: {
         type: String
     }
