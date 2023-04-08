@@ -2,29 +2,34 @@ const mongoose = require("mongoose");
 
 
 const addMaterialSchema = mongoose.Schema({
-    material: String,
-
-    resolution: [
-        {
-            title: String,
-            price: Number
-        },
-        {
-            title: String,
-            price: Number
-        }
-    ]
-    ,
-    finish: [
-        {
-            title: String,
-        }
-    ],
-    orientation: [
-        {
-            title: String,
-        }
-    ]
+    material: {
+        type: String,
+        require: true
+    },
+    resolutionHighRes: {
+        type: String,
+        require: true
+    },
+    resolutionNormal: {
+        type: String,
+        require: true
+    },
+    finishStandard: {
+        type: String,
+        require: true
+    },
+    finishNormal: {
+        type: String,
+        require: true
+    },
+    orientationLetUsDecide: {
+        type: String,
+        require: true
+    },
+    orientationCustom: {
+        type: String,
+        require: true
+    },
 
 },
     {
