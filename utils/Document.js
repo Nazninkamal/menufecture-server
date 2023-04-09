@@ -1,3 +1,5 @@
+
+
 const documentPDF = (data) => {
   const today = new Date().toLocaleDateString();
 
@@ -26,7 +28,7 @@ const documentPDF = (data) => {
           <div  style="border: green 1px dotted;">
             <div  style="display:flex; justify-content:space-between;">
               <div style="display: flex;">
-               <img style="width: 150px; height: 150px; margin: 1rem;" src="" alt="">
+               <img style="width: 150px; height: 150px; margin: 1rem;" src='https://i.ibb.co/SdQ9ytQ/logo-no-background.png' alt="">
                  <div style="line-height: 5px; margin-top: 1rem;">
                <p style="font-size:small;">  ${data?.quoteTitle}</p>
                <p style="font-size:small;">Material: ${data?.material} </p>
@@ -40,7 +42,7 @@ const documentPDF = (data) => {
    
             <div style="border: green 1px dotted; margin: 1rem; padding: 1rem 2rem; line-height: 8px;">
                <h5 style="font-size: small;">Quantity: ${data?.quantity}</h5>
-               <h5 style="font-size: small;">Total Price: $ ${data?.price}</h5>
+               <h5 style="font-size: small;">Total Price: $ ${data?.status === "approved" ? data?.price : "N/A"}</h5>
                <h5 style="font-size: small;">Status: ${data?.status}</h5>
                <h5 style="font-size: small;">Delivery will take:${data?.deliveryDate}</h5>
    
