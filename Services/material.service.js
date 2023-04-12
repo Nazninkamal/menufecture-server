@@ -5,7 +5,7 @@ exports.createMaterialService = async (data) => {
     return material;
 };
 exports.getMaterialService = async () => {
-    const material = await Material.find({});
+    const material = await Material.find({}).sort('-createdAt');
     return material;
 };
 exports.deleteMaterialService = async (id) => {

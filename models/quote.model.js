@@ -51,7 +51,7 @@ const quoteSchema = mongoose.Schema({
     },
     orderStatus: {
         type: String,
-        enum: ["order", "payment"],
+        enum: ["order", "payment", "approved", "rejected", "completed", "continue"],
     },
     sendToAdmin: {
         type: String,

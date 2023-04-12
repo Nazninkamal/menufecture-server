@@ -3,23 +3,23 @@ const Quote = require("../models/quote.model");
 
 
 exports.addQuoteService = async (ProjectData) => {
-    const quote = await Quote.create(ProjectData);
+    const quote = await Quote.create(ProjectData).sort('-createdAt');
     return quote;
 };
 exports.getMyQuoteService = async (id) => {
-    const quotes = await Quote.find({ project: id });
+    const quotes = await Quote.find({ project: id }).sort('-createdAt');
     return quotes;
 };
 exports.getMyAllQuoteService = async (email) => {
-    const quotes = await Quote.find({ email });
+    const quotes = await Quote.find({ email }).sort('-createdAt');
     return quotes;
 };
 exports.getMyAllOrderQuoteService = async () => {
-    const quotes = await Quote.find({}).populate("supplier");
+    const quotes = await Quote.find({}).populate("supplier").populate('user').sort('-createdAt');
     return quotes;
 };
 exports.getMySingleQuoteService = async (id) => {
-    const quotes = await Quote.findOne({ _id: id });
+    const quotes = await Quote.findOne({ _id: id }).populate('user');
     return quotes;
 };
 exports.downloadDocumentService = async (id) => {
