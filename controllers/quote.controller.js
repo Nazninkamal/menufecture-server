@@ -11,7 +11,7 @@ exports.addQuote = async (req, res) => {
         const email = req.user.email;
         const user = await User.findOne({ email });
 
-
+      
         if (!user) {
             return res.status(401).json({
                 result: quote,
@@ -31,6 +31,10 @@ exports.addQuote = async (req, res) => {
                 error: 'Pleas add a file'
             })
         }
+
+
+
+
         const uniqueSuffix = Math.round(Math.random() * 1E5) + '-' + Math.round(Math.random() * 1E5);
         const fileName = await req?.file?.filename;
         const host = await req.protocol + '://' + req.get('host');
@@ -39,8 +43,9 @@ exports.addQuote = async (req, res) => {
         const newFile = await { ...req.file, fileURL };
 
         const newQuote = { quoteTitle: uniqueSuffix, threeDFile: newFile, user: user._id, email: user.email, project: id, type };
-
+ 
         const quote = await addQuoteService(newQuote);
+      
         res.status(200).json({
             result: quote,
             status: "success",

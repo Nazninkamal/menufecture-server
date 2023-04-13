@@ -3,7 +3,7 @@ const Quote = require("../models/quote.model");
 
 
 exports.addQuoteService = async (ProjectData) => {
-    const quote = await Quote.create(ProjectData).sort('-createdAt');
+    const quote = await Quote.create(ProjectData);
     return quote;
 };
 exports.getMyQuoteService = async (id) => {
