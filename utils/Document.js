@@ -50,21 +50,21 @@ const documentPDF = (data) => {
                <p style="font-size: small;">Quantity: ${data?.quantity}</p>
                <p style="font-size: small;">Price: ${data?.status === "approved" &&
       data?.profit ?
-      data?.price * data?.quantity + data?.profit :
-      "N/A"}$ </p>
+      data?.price + data?.profit :
+      "N/A"}€  </p>
                <p style="font-size: small;">Es. Tax:${data?.status === "approved" &&
       data?.profit ?
       '20%' :
       "N/A"}</p>
                <p style="font-size: small;">Shipping:${data?.status === "approved" &&
       data?.profit ?
-      '30$' :
+      '30€' :
       "N/A"}</p>
 
                <p style="font-size: small;">Sub Total:${data?.status === "approved" &&
       data?.profit ?
-      (data?.price * data?.quantity + data?.profit) + (data?.price * data?.quantity + data?.profit) * (20 / 100) + 30 :
-      "N/A"}$</p>
+      (data?.price + data?.profit) + (data?.price + data?.profit) * (20 / 100) + 30 :
+      "N/A"}€</p>
      
 
       
@@ -84,13 +84,13 @@ const documentPDF = (data) => {
           <div style="display: grid;grid-template-columns: auto auto; gap: 1rem; margin: 1rem;">
             <div style="border: green 1px dotted; padding: 1rem;">
                <h5 style="font-size: small;">Shipping details</h5>
-               <p style="font-size: small;">Full name: ${data?.user?.fullName}</p>
-               <p style="font-size: small;">Email:  ${data?.user?.email} </p>
-               <p style="font-size: small;">Company:  ${data?.user?.company}</p>
-               <p style="font-size: small;">Phone:  ${data?.user?.phoneNumber}</p>
-               <p style="font-size: small;">Country:  ${data?.user?.country}</p>
-               <p style="font-size: small;">Language:  ${data?.user?.language}</p>
-               <p style="font-size: small;">Postal Code:  ${data?.user?.postalCode}</p>
+               <p style="font-size: small;">Full name: ${data?.user?.role !== 'supplier' ? data?.user?.fullName : "N/A"}</p>
+               <p style="font-size: small;">Email:  ${data?.user?.role !== 'supplier' ? data?.user?.email : "N/A"} </p>
+               <p style="font-size: small;">Company:  ${data?.user?.role !== 'supplier' ? data?.user?.company : "N/A"}</p>
+               <p style="font-size: small;">Phone:  ${data?.user?.role !== 'supplier' ? data?.user?.phoneNumber : "N/A"}</p>
+               <p style="font-size: small;">Country:  ${data?.user?.role !== 'supplier' ? data?.user?.country : "N/A"}</p>
+               <p style="font-size: small;">Language:  ${data?.user?.role !== 'supplier' ? data?.user?.language : "N/A"}</p>
+               <p style="font-size: small;">Postal Code:  ${data?.user?.role !== 'supplier' ? data?.user?.postalCode : "N/A"}</p>
                
             </div>
    
