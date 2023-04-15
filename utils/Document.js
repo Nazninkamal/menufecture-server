@@ -52,16 +52,16 @@ const documentPDF = (data) => {
       data?.profit ?
       data?.price + data?.profit :
       "N/A"}€  </p>
-               <p style="font-size: small;">Es. Tax:${data?.status === "approved" &&
+               <p style="font-size: small;">Es. Tax: ${data?.status === "approved" &&
       data?.profit ?
       '20%' :
       "N/A"}</p>
-               <p style="font-size: small;">Shipping:${data?.status === "approved" &&
+               <p style="font-size: small;">Shipping: ${data?.status === "approved" &&
       data?.profit ?
       '30€' :
       "N/A"}</p>
 
-               <p style="font-size: small;">Sub Total:${data?.status === "approved" &&
+               <p style="font-size: small;">Subtotal: ${data?.status === "approved" &&
       data?.profit ?
       (data?.price + data?.profit) + (data?.price + data?.profit) * (20 / 100) + 30 :
       "N/A"}€</p>
@@ -69,7 +69,7 @@ const documentPDF = (data) => {
 
       
                <p style="font-size: small;">Status: ${data?.status}</p>
-               <p style="font-size: small;">Delivery will take:${data?.deliveryDate} days</p>
+               <p style="font-size: small;">Delivery will take: ${data?.deliveryDate} days</p>
    
             </div>
          
