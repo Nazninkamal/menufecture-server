@@ -1,7 +1,7 @@
 const User = require("../models/user_module");
 var html_to_pdf = require('html-pdf-node');
 
-const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService,getMyAllOrderQuoteService } = require("../Services/quote.service");
+const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService, getMyAllOrderQuoteService } = require("../Services/quote.service");
 const documentPDF = require("../utils/Document");
 
 
@@ -74,7 +74,7 @@ exports.getMyAllQuotes = async (req, res) => {
 };
 exports.getMyAllOrderQuotes = async (req, res) => {
     try {
-    
+
 
         const quotes = await getMyAllOrderQuoteService();
         res.status(200).json({
@@ -199,13 +199,15 @@ exports.uploadTheeDFile = async (req, res) => {
 exports.downLoadDocument = async (req, res) => {
     try {
 
+
+        const role = req.user.role;
         const { id } = req.params;
 
         const data = await downloadDocumentService(id);
-      
+
 
         let options = { format: 'A4' };
-        let file = { content: documentPDF(data) };
+        let file = { content: documentPDF(data, role) };
 
         await html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
 

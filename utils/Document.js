@@ -1,6 +1,6 @@
 
 
-const documentPDF = (data) => {
+const documentPDF = (data, role) => {
   const today = new Date().toLocaleDateString();
 
 
@@ -84,13 +84,13 @@ const documentPDF = (data) => {
           <div style="display: grid;grid-template-columns: auto auto; gap: 1rem; margin: 1rem;">
             <div style="border: green 1px dotted; padding: 1rem;">
                <h5 style="font-size: small;">Shipping details</h5>
-               <p style="font-size: small;">Full name: ${data?.user?.role !== 'supplier' ? data?.user?.fullName : "N/A"}</p>
-               <p style="font-size: small;">Email:  ${data?.user?.role !== 'supplier' ? data?.user?.email : "N/A"} </p>
-               <p style="font-size: small;">Company:  ${data?.user?.role !== 'supplier' ? data?.user?.company : "N/A"}</p>
-               <p style="font-size: small;">Phone:  ${data?.user?.role !== 'supplier' ? data?.user?.phoneNumber : "N/A"}</p>
-               <p style="font-size: small;">Country:  ${data?.user?.role !== 'supplier' ? data?.user?.country : "N/A"}</p>
-               <p style="font-size: small;">Language:  ${data?.user?.role !== 'supplier' ? data?.user?.language : "N/A"}</p>
-               <p style="font-size: small;">Postal Code:  ${data?.user?.role !== 'supplier' ? data?.user?.postalCode : "N/A"}</p>
+               <p style="font-size: small;">Full name: ${role !== 'supplier' ? data?.user?.fullName : "N/A"}</p>
+               <p style="font-size: small;">Email:  ${role !== 'supplier' ? data?.user?.email : "N/A"} </p>
+               <p style="font-size: small;">Company:  ${role !== 'supplier' ? data?.user?.company : "N/A"}</p>
+               <p style="font-size: small;">Phone:  ${role !== 'supplier' ? data?.user?.phoneNumber : "N/A"}</p>
+               <p style="font-size: small;">Country:  ${role !== 'supplier' ? data?.user?.country : "N/A"}</p>
+               <p style="font-size: small;">Language:  ${role !== 'supplier' ? data?.user?.language : "N/A"}</p>
+               <p style="font-size: small;">Postal Code:  ${role !== 'supplier' ? data?.user?.postalCode : "N/A"}</p>
                
             </div>
    
