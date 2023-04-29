@@ -25,7 +25,6 @@ const userSchema = Mongoose.Schema({
     },
     company: {
         type: String,
-        require: true,
         trim: true,
     },
     country: {
@@ -35,7 +34,6 @@ const userSchema = Mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        require: true,
         trim: true,
     },
     postalCode: {
@@ -48,7 +46,7 @@ const userSchema = Mongoose.Schema({
     },
     language: {
         type: String,
-        require: true,
+ 
         trim: true,
     },
     password: {
