@@ -43,6 +43,9 @@ const userSchema = Mongoose.Schema({
         require: true,
         trim: true,
     },
+    address: {
+        type: String
+    },
     language: {
         type: String,
         require: true,

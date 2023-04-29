@@ -3,6 +3,10 @@
 const documentPDF = (data, role) => {
   const today = new Date().toLocaleDateString();
 
+  let additional = data?.additional;
+
+  additional?.includes('https://drive.google.com/') ? additional = `<a href="http://" target="_blank" rel="noopener noreferrer">${additional}</a>` : additional = `<p>${additional}</p>`
+
 
   return `
    <!DOCTYPE html>
@@ -23,12 +27,11 @@ const documentPDF = (data, role) => {
            <h5 >Date: ${today}</h5>
           </div>
            
-          <div style="display:flex; justify-content:space-between;">
+          <div >
 
          
            <h5>Quote Number: ${data?._id}</h5>
          
-           <h5>Ready for ${data?.user?.company} company</h5>  
           </div>
    
           <div  style="border: green 1px dotted;">
@@ -48,24 +51,35 @@ const documentPDF = (data, role) => {
    
             <div style="border: green 1px dotted; margin: 1rem; padding: 1rem 2rem; line-height: 8px;">
                <p style="font-size: small;">Quantity: ${data?.quantity}</p>
-               <p style="font-size: small;">Price: ${data?.status === "approved" &&
+
+              ${role === "supplier" ? ` <p style="font-size: small;">Price: ${data?.status === "approved" &&
       data?.profit ?
-      data?.price + data?.profit :
-      "N/A"}€  </p>
-               <p style="font-size: small;">Es. Tax: ${data?.status === "approved" &&
-      data?.profit ?
-      '20%' :
-      "N/A"}</p>
+      data?.price :
+      "N/A"}€  </p>` : ` <p style="font-size: small;">Price: ${data?.status === "approved" &&
+        data?.profit ?
+        data?.price + data?.profit :
+        "N/A"}€  </p>`}
+
+    ${role === "supplier" ?
+      "" :
+
+      `<div>
+      <p style="font-size: small;">Es. Tax: ${data?.status === "approved" &&
+        data?.profit ?
+        '20%' :
+        "N/A"}</p>
+
                <p style="font-size: small;">Shipping: ${data?.status === "approved" &&
-      data?.profit ?
-      '30€' :
-      "N/A"}</p>
+        data?.profit ?
+        '30€' :
+        "N/A"}</p>
 
                <p style="font-size: small;">Subtotal: ${data?.status === "approved" &&
-      data?.profit ?
-      (data?.price + data?.profit) + (data?.price + data?.profit) * (20 / 100) + 30 :
-      "N/A"}€</p>
-     
+        data?.profit ?
+        (data?.price + data?.profit) + (data?.price + data?.profit) * (22 / 100) + 30 :
+        "N/A"}€</p>
+      </div>`
+    }
 
       
                <p style="font-size: small;">Status: ${data?.status}</p>
@@ -74,40 +88,48 @@ const documentPDF = (data, role) => {
             </div>
          
          </div>
-         <hr>
-           <div style="text-align: center; line-height: 5px;">
-            <h5>Want you update quote?</h5>
-            <p>Please Return to the configuration page and update</p>
-           </div>
-         <hr>
+        
+         <br/> <br/>
    
           <div style="display: grid;grid-template-columns: auto auto; gap: 1rem; margin: 1rem;">
             <div style="border: green 1px dotted; padding: 1rem;">
-               <h5 style="font-size: small;">Shipping details</h5>
-               <p style="font-size: small;">Full name: ${role !== 'supplier' ? data?.user?.fullName : "N/A"}</p>
-               <p style="font-size: small;">Email:  ${role !== 'supplier' ? data?.user?.email : "N/A"} </p>
-               <p style="font-size: small;">Company:  ${role !== 'supplier' ? data?.user?.company : "N/A"}</p>
-               <p style="font-size: small;">Phone:  ${role !== 'supplier' ? data?.user?.phoneNumber : "N/A"}</p>
-               <p style="font-size: small;">Country:  ${role !== 'supplier' ? data?.user?.country : "N/A"}</p>
-               <p style="font-size: small;">Language:  ${role !== 'supplier' ? data?.user?.language : "N/A"}</p>
-               <p style="font-size: small;">Postal Code:  ${role !== 'supplier' ? data?.user?.postalCode : "N/A"}</p>
+            <h5 style="font-size: small;">Shipping details</h5>
+          ${role === 'supplier' ?
+      `<div style="font-size: small;">
+            <p>QTool srl <br/>
+            Via Carlo Viola, 78 <br/>
+            Pont Saint Martin 11026  <br/>
+            (+39) 3801207403  <br/>
+            info@qtoolsrl.it
+            </p>
+      </div>
+            `
+      :
+      `<div>
+     
+      <p style="font-size: small;">Full name: ${data?.user?.fullName}</p>
+      <p style="font-size: small;">Email:  ${data?.user?.email} </p>
+      <p style="font-size: small;">Company:  ${data?.user?.company}</p>
+      <p style="font-size: small;">Phone:  ${data?.user?.phoneNumber}</p>
+      <p style="font-size: small;">Country:  ${data?.user?.country}</p>
+      <p style="font-size: small;">Postal Code:  ${data?.user?.postalCode}</p>
+    </div>`}
                
             </div>
    
    
             <div style="border: green 1px dotted; text-align: center;padding-top: 3rem;">
-               <h5>Order Summery</h5>
-               <p style="font-size: small;">Your parts need to your attention </p>
-               <p style="font-size: small;">Please go to configure page and checkout</p>
+               <h5>Additional requests</h5>
+          
+               <span style="font-size: small;">${additional}</span>
                               
             </div>
           </div>
           </div>
            
           <div style="line-height: 5px; text-align: center; margin: 1.5rem 0 1.5rem 0;">
-            <p style="font-size: small;">Thank you for the opportunity to quote your parts</p>
-            <p style="font-size: small;">Contact Customer Service at (87 7 ) 47 9-3680 or customerservice@protolabs.com</p>
-            <!-- <p>JSON Manufecturing Company, 5540 Pioneer Creek Dr. Maple Plain, MN 55359 United State</p> -->
+            <p style="font-size: small;">Contact Customer Service at (+39) 3801207403 or info@qtoolsrl.it</p>
+            <!-- <p>JSON Manufacturing Company, 5540 Pioneer Creek Dr. Maple Plain, MN 55359 United State</p> -->
           </div>
        </main>
    </body>
