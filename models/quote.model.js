@@ -68,8 +68,11 @@ const quoteSchema = mongoose.Schema({
     deliveryDate: {
         type: String
     },
-    additional: {
+    additionalText: {
         type: String
+    },
+    additionalFile: {
+        type: Object
     },
     profit: {
         type: Number

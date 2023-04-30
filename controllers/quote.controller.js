@@ -1,7 +1,7 @@
 const User = require("../models/user_module");
 var html_to_pdf = require('html-pdf-node');
 
-const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService, getMyAllOrderQuoteService } = require("../Services/quote.service");
+const { addQuoteService, updateMyQuoteService, uploadTheeDFileService, getMyQuoteService, getMySingleQuoteService, deleteSingleQuoteService, downloadDocumentService, getMyAllQuoteService, getMyAllOrderQuoteService, fileUploadService } = require("../Services/quote.service");
 const documentPDF = require("../utils/Document");
 
 
@@ -215,7 +215,33 @@ exports.downLoadDocument = async (req, res) => {
 
         });
 
+    } catch (error) {
+        res.status(500).json({
+            status: "fail",
+            error,
+        });
+    }
+}
+exports.fileUploader = async (req, res) => {
+    try {
 
+
+        if (!req.file) {
+            return res.suite(401).json({
+                status: 'fail',
+                error: 'Pleas add a file'
+            })
+        }
+
+        const fileName = await req?.file?.filename;
+        const host = req.protocol + '://' + req.get('host');
+        const fileURL = host + "/files/" + fileName;
+        const newFile = await { ...req.file, fileURL };
+
+        res.status(200).json({
+            result: newFile,
+            status: "success"
+        });
 
     } catch (error) {
         res.status(500).json({

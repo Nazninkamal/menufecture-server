@@ -3,7 +3,7 @@ const path = require("path");
 
 
 const storage = multer.diskStorage({
-  destination: "images/",
+  destination: "files/",
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     cb(null, uniqueSuffix + "-" + file.originalname)
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 const uploader = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    const supportedImage = /png|jpg|webp|stp|glb/;
+    const supportedImage = /png|jpg|webp|stp|glb|jpeg|pdf/;
     const extension = path.extname(file.originalname);
 
     if (supportedImage.test(extension)) {
