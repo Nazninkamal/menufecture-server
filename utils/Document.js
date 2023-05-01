@@ -3,9 +3,7 @@
 const documentPDF = (data, role) => {
   const today = new Date().toLocaleDateString();
 
-  let additional = data?.additional;
-
-  additional?.includes('https://drive.google.com/') ? additional = `<a href="http://" target="_blank" rel="noopener noreferrer">${additional}</a>` : additional = `<p>${additional}</p>`
+  let additionalText = data?.additionalText;
 
 
   return `
@@ -121,7 +119,7 @@ const documentPDF = (data, role) => {
             <div style="border: green 1px dotted; text-align: center;padding-top: 3rem;">
                <h5>Additional requests</h5>
           
-               <span style="font-size: small;">${additional}</span>
+               <span style="font-size: small;">${additionalText}</span>
                               
             </div>
           </div>
